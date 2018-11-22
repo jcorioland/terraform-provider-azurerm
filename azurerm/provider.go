@@ -150,6 +150,7 @@ func Provider() terraform.ResourceProvider {
 			"azurerm_cdn_profile":                            resourceArmCdnProfile(),
 			"azurerm_cognitive_account":                      resourceArmCognitiveAccount(),
 			"azurerm_container_registry":                     resourceArmContainerRegistry(),
+			"azurerm_issue_use_set":                          fakeResourceForTest(),
 			"azurerm_container_service":                      resourceArmContainerService(),
 			"azurerm_container_group":                        resourceArmContainerGroup(),
 			"azurerm_cosmosdb_account":                       resourceArmCosmosDBAccount(),
