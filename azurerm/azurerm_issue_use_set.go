@@ -3,7 +3,9 @@ package azurerm
 import (
 	"fmt"
 
+	"github.com/hashicorp/terraform/helper/hashcode"
 	"github.com/hashicorp/terraform/helper/schema"
+	"github.com/hashicorp/terraform/helper/validation"
 )
 
 func fakeResourceForTest() *schema.Resource {
@@ -35,11 +37,12 @@ func fakeResourceForTest() *schema.Resource {
 				MinItems: 1,
 				Optional: true,
 				Elem: &schema.Schema{
-					Type:             schema.TypeString,
-					StateFunc:        azureRMNormalizeLocation,
-					DiffSuppressFunc: azureRMSuppressLocationDiff,
+					Type:         schema.TypeString,
+					ValidateFunc: validation.NoZeroValues,
 				},
-				Set: schema.HashString,
+				Set: func(v interface{}) int {
+					return hashcode.String(azureRMNormalizeLocation(v.(string)))
+				},
 			},
 		},
 	}
